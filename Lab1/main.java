@@ -3,8 +3,8 @@ public static void main(String[] args) {
 
 
     BuddyInfo aBuddy = new BuddyInfo("David");
-    ArrayList<BuddyInfo> aCollection = new ArrayList<BuddyInfo>();
+    AddressBook aBook = new AddressBook();
+    aBook.addBuddy(aBuddy);
 
-    aCollection.add(aBuddy);
-    AddressBook aBook = new AddressBook(aCollection);
+    System.out.println("Address Book");
 }

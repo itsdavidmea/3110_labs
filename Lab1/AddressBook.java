@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class AddressBook {
     private ArrayList<BuddyInfo> collectionBuddyInfo = new ArrayList<BuddyInfo>();
 
-    public AddressBook(ArrayList<BuddyInfo> collectionBuddyInfo) {
+    public AddressBook() {
         this.collectionBuddyInfo = collectionBuddyInfo;
     }
 
@@ -19,7 +19,7 @@ public class AddressBook {
     public void addBuddy(BuddyInfo buddy) {
         collectionBuddyInfo.add(buddy);
     }
-    
+
     public void removeBuddy(BuddyInfo buddy) {
         collectionBuddyInfo.remove(buddy);
     }
