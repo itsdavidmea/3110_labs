@@ -49,8 +49,8 @@ public class Game
         outside.setExit(Room.NORTH, theater);
         outside.setExit(Room.SOUTH, lab);
         outside.setExit(Room.WEST, pub);
-        outside.setExit("down", Telephone_Cab);
-        Telephone_Cab.setExit("up", outside);
+        outside.setExit(Room.DOWN, Telephone_Cab);
+        Telephone_Cab.setExit(Room.UP, outside);
 
 
 
