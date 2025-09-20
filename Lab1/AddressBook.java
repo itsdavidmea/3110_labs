@@ -2,15 +2,13 @@
 import java.util.ArrayList;
 
 public class AddressBook {
-    private ArrayList<BuddyInfo> collectionBuddyInfo = new ArrayList<BuddyInfo>();
+    private ArrayList<BuddyInfo> collectionBuddyInfo;
 
     public AddressBook() {
-        this.collectionBuddyInfo = collectionBuddyInfo;
+        this.collectionBuddyInfo = new ArrayList<BuddyInfo>();
     }
 
-    public ArrayList<BuddyInfo> getCollectionBuddyInfo() {
-        return collectionBuddyInfo;
-    }
+
 
     public void setCollectionBuddyInfo(ArrayList<BuddyInfo> collectionBuddyInfo) {
         this.collectionBuddyInfo = collectionBuddyInfo;

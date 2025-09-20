@@ -1,10 +1,15 @@
-public static void main(String[] args) {
+public class Main {
+    public static void main(String[] args) {
 
 
 
-    BuddyInfo aBuddy = new BuddyInfo("David");
-    AddressBook aBook = new AddressBook();
+        BuddyInfo aBuddy = new BuddyInfo("David");
+        AddressBook aBook = new AddressBook();
+        aBook.addBuddy(aBuddy);
+        aBook.removeBuddy(aBuddy);
 
-
-    System.out.println("Address Book");
+        System.out.println("Address Book");
+        System.out.println("new change");
+    }
 }
+
