@@ -150,8 +150,7 @@ public class Hand implements Comparable<Hand> {
     public int compareTo(Hand h) {
         //hint: delegate!
 		//and don't worry about breaking ties
-        int anInt = 3;
-        return anInt;
+        return this.kind().compareTo(h.kind());
     }
     
     /**
