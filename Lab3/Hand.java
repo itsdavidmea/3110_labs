@@ -24,12 +24,55 @@ public class Hand implements Comparable<Hand> {
 
 
     }
-    
+    private List<Integer> transformIntoSortedRank () {
+        List<Integer> rankList = new ArrayList<>();
+        for(Card card: cards) {
+            rankList.add(card.getRank().ordinal());
+
+        }
+
+        rankList.sort(Comparator.naturalOrder());
+       return rankList;
+    }
     /**
      * @returns true if the hand has n cards of the same rank
 	 * e.g., "TD TC TH 7C 7D" returns True for n=2 and n=3, and False for n=1 and n=4
      */
     protected boolean hasNKind(int n) {
+
+        List<Integer> rankList = this.transformIntoSortedRank ();
+
+
+        if (n == 3) {
+            for (int i=0; i < rankList.size() - 1; i++) {
+                if (Objects.equals(rankList.get(i), rankList.get(i + 1))    && Objects.equals(rankList.get(i+1), rankList.get(i + 2))   ) {
+                    return true;
+                } else if (i == 3) {
+                    return false;
+                }
+                i++;
+
+            }
+        } else if (n == 4) {
+            for (int i=0; i < rankList.size() - 1; i++) {
+                if (Objects.equals(rankList.get(i), rankList.get(i + 1))    && Objects.equals(rankList.get(i+1), rankList.get(i + 2))  && Objects.equals(rankList.get(i+2), rankList.get(i + 3))  ) {
+                    return true;
+                } else if (i == 1) {
+                    return false;
+                }
+
+
+            }
+        } else if (n == 2) {
+
+            for (int i=0; i < rankList.size() - 1; i++) {
+                if (Objects.equals(rankList.get(i), rankList.get(i + 1))) {
+                    return true;
+                }
+
+            }
+        }
+
         return false;
     }
     
@@ -38,7 +81,25 @@ public class Hand implements Comparable<Hand> {
      * @returns true if the hand has two pairs
      */
     public boolean isTwoPair() {
+        List<Integer> rankList = this.transformIntoSortedRank ();
+
+        int j = 1;
+        int numberOfPairs = 0;
+        for (int i=0; i < rankList.size() - 1; i++) {
+            if (Objects.equals(rankList.get(i), rankList.get(j))) {
+                numberOfPairs += 1;
+                if (j < 3) {
+                    j+= 2;
+                }
+            }
+            i++;
+            if (numberOfPairs == 2) {return true;}
+
+
+
+        }
         return false;
+
     }   
     
     /**
@@ -51,14 +112,16 @@ public class Hand implements Comparable<Hand> {
 
         }
         rankList.sort(Comparator.naturalOrder());
+        if (rankList.getLast() == 12 && rankList.getFirst()==0) {
+            rankList.set(rankList.size() - 1, rankList.get(rankList.size() - 2) + 1);
+        }
         for (int i=0; i < rankList.size() - 1; i++) {
-            if (rankList.get(i) < rankList.get(i+1)) {
-
-            } else {
+            if (rankList.get(i) + 1 != rankList.get(i + 1)) {
                 return false;
             }
 
         }
+
         return true;
     }
     
@@ -66,7 +129,21 @@ public class Hand implements Comparable<Hand> {
      * @returns true if the hand is a flush
      */
     public boolean isFlush() {
-        return false;
+        List<Integer> suitList = new ArrayList<>();
+        for(Card card: cards) {
+            suitList.add(card.getSuit().ordinal());
+
+        }
+
+        for (int i=0; i < suitList.size() - 1; i++) {
+            if (Objects.equals(suitList.get(i), suitList.get(i + 1))) {
+
+            } else {
+                return false;
+            }
+
+        }
+        return true;
     }
     
     @Override
