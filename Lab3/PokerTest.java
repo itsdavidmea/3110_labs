@@ -31,7 +31,7 @@ public class PokerTest extends junit.framework.TestCase
     public void testRank() {
         assertEquals(Card.Rank.DEUCE.ordinal(), 0);
         assertEquals(pair.kind(), Hand.Kind.PAIR);
-//        assertEquals(high.kind(), Hand.Kind.HIGH_CARD);
+        assertEquals(high.kind(), Hand.Kind.HIGH_CARD);
         assertEquals(fk.kind(), Hand.Kind.FOUR_OF_A_KIND);
         assertEquals(tp.kind(), Hand.Kind.TWO_PAIR);
     }
