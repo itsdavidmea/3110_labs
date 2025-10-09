@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,11 +7,20 @@ public class Element {
 
     private String tag;
 
+
     private List<Element> elementContent;
 
     public Element(String tag) {
         this.tag = tag;
-        elementContent = new ArrayList<Element>();
+        elementContent = new ArrayList<>();
+
+
+    }
+
+    public Element(String tag, String attributes) {
+        this.tag = tag;
+        elementContent = new ArrayList<>();
+
 
 
     }
@@ -21,15 +31,12 @@ public class Element {
 
     }
 
+
+
     public String getTag() {
         return this.tag;
     }
 
-
-
-    public List<Element> getElementContent() {
-        return elementContent;
-    }
 
     public void removeElement(Element el) {
         elementContent.remove(el);
@@ -37,11 +44,23 @@ public class Element {
 
     @Override
     public String toString() {
-        if (elementContent.getFirst() instanceof TextElement) {
-            return "<" + tag + ">" +  elementContent.getFirst().toString() + "<" + tag + "/>";
+        String subElements = "";
+        if (elementContent.size() == 0) {
+            return "<" + tag + ">"  + "<" + tag + "/>";
         } else {
-
+            for (Element anElement: elementContent) {
+                subElements += " \n     " + anElement.toString();
+            }
         }
-        return null;
+
+
+
+
+
+
+        return  "<" + tag + ">"  + subElements + "  " + "\n  <" + tag + "/>";
+
+
+
     }
 }
