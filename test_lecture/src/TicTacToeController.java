@@ -3,6 +3,7 @@ import java.awt.event.ActionListener;
 
 public class TicTacToeController implements ActionListener {
     TicTacToeModel model;
+
     public TicTacToeController(TicTacToeModel model) {
         this.model = model;
     }
