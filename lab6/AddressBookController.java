@@ -4,17 +4,24 @@ import java.awt.event.ActionListener;
 
 public class AddressBookController implements ActionListener {
     AddressBookModel model;
+    private AddressBookFrame frame; // or just the JTextField
+
+    public AddressBookController(AddressBookModel model, AddressBookFrame frame) {
+        this.model = model;
+        this.frame = frame;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String inputValue = e.getActionCommand().substring(4);
 
-        if (e.getActionCommand().startsWith("add:")) {
-            System.out.println("add");
-            model.addBuddy(inputValue);
+       String inputValue = frame.getInputName().getText();
+       BuddyInfo inputBuddy = new BuddyInfo(inputValue);
 
-        } else if (e.getActionCommand().startsWith("remove:")) {
-            model.removeBuddy(inputValue);
+        if (e.getActionCommand().startsWith("add")) {
+            model.addBuddy(inputBuddy);
+
+        } else if (e.getActionCommand().startsWith("remove")) {
+            model.removeBuddy(inputBuddy);
         }
 
 

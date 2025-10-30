@@ -1,12 +1,15 @@
 
+import javax.swing.*;
 import java.util.*;
 
 public class AddressBookModel {
-    private ArrayList<BuddyInfo> collectionBuddyInfo;
+
+
     private List<AddressBookView> views;
+    public DefaultListModel<String> collectionBuddyInfo = new DefaultListModel<>();
 
     public AddressBookModel() {
-        this.collectionBuddyInfo = new ArrayList<BuddyInfo>();
+
         views = new ArrayList<>();
     }
 
@@ -21,32 +24,36 @@ public class AddressBookModel {
         views.remove(view);
     }
 
-    public void setCollectionBuddyInfo(ArrayList<BuddyInfo> collectionBuddyInfo) {
-        this.collectionBuddyInfo = collectionBuddyInfo;
-    }
 
-    public void addBuddy(String buddyName) {
 
-        collectionBuddyInfo.add(new BuddyInfo(buddyName));
+    public void addBuddy(BuddyInfo buddy) {
+
+        collectionBuddyInfo.addElement(buddy.toString());
 
         for (AddressBookView view: views) {
-            view.handleAddBuddyInfo( collectionBuddyInfo);
+            view.handleAddBuddyInfo(collectionBuddyInfo);
 
         }
     }
 
-    public void removeBuddy(String buddyName) {
+    public void removeBuddy(BuddyInfo buddyTodelete) {
+
+        for (int i =0; i < collectionBuddyInfo.size(); i++) {
+            String buddyMatch = collectionBuddyInfo.get(i).toString();
+            if (buddyMatch.equals(buddyTodelete.toString())){
+
+                for (AddressBookView view: views) {
+                    collectionBuddyInfo.remove(i);
+                    view.handleAddBuddyInfo( collectionBuddyInfo);
 
 
-        for (BuddyInfo contact: collectionBuddyInfo) {
-            if (contact.getName().equals(buddyName)) {
-                collectionBuddyInfo.remove(contact);
+                }
+                break;
             }
         }
 
-        for (AddressBookView view: views) {
-            view.handleAddBuddyInfo( collectionBuddyInfo);
 
-        }
+
+
     }
 }

@@ -7,31 +7,38 @@ public class AddressBookFrame extends JFrame implements AddressBookView {
     private AddressBookModel model;
     private JButton addButton;
     private JButton removeButton;
-    private JTextField allContacts;
+    private JList<String> allContacts;
+
     private JTextField inputName;
     private AddressBookController controller;
+    private JPanel westPanel;
+    private JTextArea emptyContact;
+    private JMenuBar menuBar = new JMenuBar();
+    private JMenu operations;
+    private JMenuItem addBuddy;
+    private JMenuItem removeBuddy;
+
     public AddressBookFrame() {
         super("AddressBook");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(333,300);
+        this.setSize(333, 300);
         this.setLayout(new BorderLayout());
 
         model = new AddressBookModel();
         model.addAddressBookView(this);
+        controller = new AddressBookController(model, this);
 
-        //add textField to the west
-        allContacts = new JTextField();
-        //allContacts.setBounds(180, 50, 1000, 25);
-        allContacts.setText("No Contacts Yet");
-        this.add(allContacts, BorderLayout.WEST);
 
+        westPanel = new JPanel(new BorderLayout());
+        westPanel.add(new JTextArea("No contacts Yet"));
+        JScrollPane scroll = new JScrollPane(westPanel);
+        this.add(scroll, BorderLayout.WEST);
 
 
 
         inputName = new JTextField(20);
         addButton = new JButton("Add Buddy");
         removeButton = new JButton("Remove Buddy");
-
 
         JPanel mainPanel = new JPanel(new GridLayout(2, 1, 5, 5));
 
@@ -55,35 +62,19 @@ public class AddressBookFrame extends JFrame implements AddressBookView {
 
         this.add(mainPanel, BorderLayout.CENTER);
 
-
-
-
-
-        // add Name textfield to the right
-
-        //button add buddy
-
-        //button remove buddy
-
         this.setVisible(true);
 
     }
 
-
     @Override
-    public void handleAddBuddyInfo( ArrayList<BuddyInfo> collectionBuddyInfo) {
-        StringBuilder container = new StringBuilder();
-        for (BuddyInfo contact: collectionBuddyInfo) {
-            container.append("\n").append(contact.getName());
-        }
-        System.out.println(container);
+    public void handleAddBuddyInfo(DefaultListModel<String> collectionBuddyInfo) {
+        westPanel.removeAll();
+        allContacts = new JList<>(collectionBuddyInfo);
+        westPanel.add(allContacts);
 
-        if (container.toString().isEmpty()) {
-            allContacts.setText("No contacts Yet");
-        } else {
-            allContacts.setText(container.toString());
+        if (allContacts.getModel().getSize() == 0) {
+            westPanel.add(new JTextArea("No Contacts Yet"));
         }
-
 
 
     }

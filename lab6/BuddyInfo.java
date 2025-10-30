@@ -1,9 +1,13 @@
 public class BuddyInfo {
     private String name;
-    private int age;
+
+
+
+    private String age;
 
     public BuddyInfo(String name) {
         this.name = name;
+
 
     }
 
@@ -11,5 +15,8 @@ public class BuddyInfo {
         return name;
     }
 
-
+    @Override
+    public String toString() {
+        return name;
+    }
 }
