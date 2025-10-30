@@ -21,17 +21,31 @@ public class AddressBookFrame extends JFrame implements AddressBookView {
     public AddressBookFrame() {
         super("AddressBook");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(333, 300);
+        this.setSize(500, 500);
         this.setLayout(new BorderLayout());
+        this.setResizable(false);
 
         model = new AddressBookModel();
         model.addAddressBookView(this);
         controller = new AddressBookController(model, this);
 
+        //Set Menu
+        menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+
+        operations = new JMenu("Operations");
+        menuBar.add(operations);
+
+        addBuddy = new JMenuItem("Add Friend");
+        removeBuddy = new JMenuItem("Remove Friend");
+        operations.add(addBuddy);
+        operations.add(removeBuddy);
+
 
         westPanel = new JPanel(new BorderLayout());
         westPanel.add(new JTextArea("No contacts Yet"));
         JScrollPane scroll = new JScrollPane(westPanel);
+        scroll.setPreferredSize(new Dimension(100, 300));
         this.add(scroll, BorderLayout.WEST);
 
 
@@ -56,9 +70,13 @@ public class AddressBookFrame extends JFrame implements AddressBookView {
 
         addButton.setActionCommand("add:" + inputName.getText());
         removeButton.setActionCommand("remove:" + inputName.getText());
+        addBuddy.setActionCommand("add:" + inputName.getText());
+        removeBuddy.setActionCommand("remove:" + inputName.getText());
 
         addButton.addActionListener(controller);
         removeButton.addActionListener(controller);
+        addBuddy.addActionListener(controller);
+        removeBuddy.addActionListener(controller);
 
         this.add(mainPanel, BorderLayout.CENTER);
 
@@ -68,7 +86,7 @@ public class AddressBookFrame extends JFrame implements AddressBookView {
 
     @Override
     public void handleAddBuddyInfo(DefaultListModel<String> collectionBuddyInfo) {
-        westPanel.removeAll();
+//        westPanel.removeAll();
         allContacts = new JList<>(collectionBuddyInfo);
         westPanel.add(allContacts);
 
