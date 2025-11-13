@@ -3,10 +3,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AddressBookController implements ActionListener {
-    AddressBookModel model;
+    private AddressBookModel model;
     private AddressBookFrame frame; // or just the JTextField
 
     public AddressBookController(AddressBookModel model, AddressBookFrame frame) {
+
         this.model = model;
         this.frame = frame;
     }
@@ -14,14 +15,21 @@ public class AddressBookController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-       String inputValue = frame.getInputName().getText();
-       BuddyInfo inputBuddy = new BuddyInfo(inputValue);
+
+
+       String name = frame.getInputName().getText();
+       String address = frame.getInputAddress().getText();
+
+
 
         if (e.getActionCommand().startsWith("add")) {
-            model.addBuddy(inputBuddy);
+
+            model.addBuddy(new BuddyInfo(name, address));
 
         } else if (e.getActionCommand().startsWith("remove")) {
-            model.removeBuddy(inputBuddy);
+            model.removeBuddy(new BuddyInfo(name, address));
+        } else if (e.getActionCommand().startsWith("save")) {
+            model.save(name);
         }
 
 

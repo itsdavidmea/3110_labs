@@ -1,32 +1,56 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.awt.event.ActionEvent;
 
 public class AddressBookFrame extends JFrame implements AddressBookView {
 
     private AddressBookModel model;
+    private AddressBookController controller;
+
+    //south panel
+    private JPanel southPanel;
     private JButton addButton;
     private JButton removeButton;
-    private JList<String> allContacts;
 
+
+    //main panel
+    private JPanel mainPanel;
+    private JLabel buddyName = new JLabel("Buddy Name:");
     private JTextField inputName;
-    private AddressBookController controller;
+    private JOptionPane userInput;
+
+    private JLabel buddyAddress = new JLabel("Buddy Address:");
+
+
+
+    private JTextField inputAddress;
+
+
+    //west panel
     private JPanel westPanel;
-    private JTextArea emptyContact;
+    private JList<BuddyInfo> allBuddy;
+
+    //menubar
     private JMenuBar menuBar = new JMenuBar();
     private JMenu operations;
     private JMenuItem addBuddy;
     private JMenuItem removeBuddy;
+    private JMenuItem saveAddressBook;
+
+
 
     public AddressBookFrame() {
         super("AddressBook");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(500, 500);
-        this.setLayout(new BorderLayout());
-        this.setResizable(false);
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(500, 500);
+        setLayout(new BorderLayout());
+        setResizable(false);
 
         model = new AddressBookModel();
         model.addAddressBookView(this);
+        allBuddy = new JList<>(model);
+
         controller = new AddressBookController(model, this);
 
         //Set Menu
@@ -38,71 +62,105 @@ public class AddressBookFrame extends JFrame implements AddressBookView {
 
         addBuddy = new JMenuItem("Add Friend");
         removeBuddy = new JMenuItem("Remove Friend");
+        saveAddressBook = new JMenuItem("Save");
         operations.add(addBuddy);
         operations.add(removeBuddy);
+        operations.add(saveAddressBook);
 
 
+        //westPanel
         westPanel = new JPanel(new BorderLayout());
         westPanel.add(new JTextArea("No contacts Yet"));
+
+
+
+
         JScrollPane scroll = new JScrollPane(westPanel);
         scroll.setPreferredSize(new Dimension(100, 300));
-        this.add(scroll, BorderLayout.WEST);
 
 
 
-        inputName = new JTextField(20);
+
+
+
+        //main panel
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        inputName = new JTextField(10);
+        inputAddress = new JTextField(10);
+
+        mainPanel.add(buddyName);
+        mainPanel.add(inputName);
+        mainPanel.add(buddyAddress);
+        mainPanel.add(inputAddress);
+
+        // south panel
+        southPanel = new JPanel();
+        southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.X_AXIS));
         addButton = new JButton("Add Buddy");
         removeButton = new JButton("Remove Buddy");
+        southPanel.add(addButton);
+        southPanel.add(removeButton);
 
-        JPanel mainPanel = new JPanel(new GridLayout(2, 1, 5, 5));
 
-        // === Row 1 (1 column) ===
-        JPanel row1 = new JPanel();
-        row1.add(inputName);
-
-        // === Row 2 (2 columns) ===
-        JPanel row2 = new JPanel(new GridLayout(1, 2, 5, 5));
-        row2.add(addButton);
-        row2.add(removeButton);
-
-        mainPanel.add(row1);
-        mainPanel.add(row2);
-
-        addButton.setActionCommand("add:" + inputName.getText());
-        removeButton.setActionCommand("remove:" + inputName.getText());
-        addBuddy.setActionCommand("add:" + inputName.getText());
-        removeBuddy.setActionCommand("remove:" + inputName.getText());
-
+        addButton.setActionCommand("add:");
         addButton.addActionListener(controller);
+
+        removeButton.setActionCommand("remove:");
         removeButton.addActionListener(controller);
+
+        addBuddy.setActionCommand("add:");
         addBuddy.addActionListener(controller);
+
+        removeBuddy.setActionCommand("remove:");
         removeBuddy.addActionListener(controller);
 
-        this.add(mainPanel, BorderLayout.CENTER);
+        saveAddressBook.setActionCommand("save");
+        saveAddressBook.addActionListener(this);
 
-        this.setVisible(true);
+        this.add(mainPanel, BorderLayout.CENTER);
+        this.add(southPanel, BorderLayout.SOUTH);
+        this.add(allBuddy, BorderLayout.WEST);
+
+
+
+
+        setVisible(true);
 
     }
 
     @Override
     public void handleAddBuddyInfo(DefaultListModel<String> collectionBuddyInfo) {
 //        westPanel.removeAll();
-        allContacts = new JList<>(collectionBuddyInfo);
-        westPanel.add(allContacts);
 
-        if (allContacts.getModel().getSize() == 0) {
-            westPanel.add(new JTextArea("No Contacts Yet"));
-        }
 
 
     }
+
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getActionCommand().startsWith("save")) {
+
+
+            String fileName = JOptionPane.showInputDialog("enter the file name to export");
+            model.save((fileName));
+        }
+
+    }
+
 
     public JTextField getInputName() {
         return inputName;
     }
 
+    public JTextField getInputAddress() {
+        return inputAddress;
+    }
+
     public static void main(String[] args) {
         AddressBookFrame frame = new AddressBookFrame();
     }
+
+
 }
 
