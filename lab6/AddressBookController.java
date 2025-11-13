@@ -26,10 +26,10 @@ public class AddressBookController implements ActionListener {
 
             model.addBuddy(new BuddyInfo(name, address));
 
+
+
         } else if (e.getActionCommand().startsWith("remove")) {
             model.removeBuddy(new BuddyInfo(name, address));
-        } else if (e.getActionCommand().startsWith("save")) {
-            model.save(name);
         }
 
 

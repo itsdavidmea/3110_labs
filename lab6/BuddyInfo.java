@@ -22,5 +22,12 @@ public class BuddyInfo {
         return  name + " -- "+ address + "   ";
     }
 
+    public static BuddyInfo importBuddyInfo(String element) {
+
+        String[] inputValue = element.split(" -- ", 3);
+        BuddyInfo newElement = new BuddyInfo(inputValue[0], inputValue[1] );
+
+        return newElement;
+    }
 
 }

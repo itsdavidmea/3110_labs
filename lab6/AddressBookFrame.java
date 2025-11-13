@@ -17,10 +17,8 @@ public class AddressBookFrame extends JFrame implements AddressBookView {
     private JPanel mainPanel;
     private JLabel buddyName = new JLabel("Buddy Name:");
     private JTextField inputName;
-    private JOptionPane userInput;
 
     private JLabel buddyAddress = new JLabel("Buddy Address:");
-
 
 
     private JTextField inputAddress;
@@ -36,7 +34,9 @@ public class AddressBookFrame extends JFrame implements AddressBookView {
     private JMenuItem addBuddy;
     private JMenuItem removeBuddy;
     private JMenuItem saveAddressBook;
-
+    private JMenuItem importAddressBook;
+    private JMenuItem importSerialisation;
+    private JMenuItem saveSerialisation;
 
 
     public AddressBookFrame() {
@@ -63,9 +63,15 @@ public class AddressBookFrame extends JFrame implements AddressBookView {
         addBuddy = new JMenuItem("Add Friend");
         removeBuddy = new JMenuItem("Remove Friend");
         saveAddressBook = new JMenuItem("Save");
+        importAddressBook = new JMenuItem("import");
+        saveSerialisation = new JMenuItem("save");
+        importSerialisation = new JMenuItem("import");
         operations.add(addBuddy);
         operations.add(removeBuddy);
         operations.add(saveAddressBook);
+        operations.add(importAddressBook);
+        operations.add(saveSerialisation);
+        operations.add(importSerialisation);
 
 
         //westPanel
@@ -73,14 +79,8 @@ public class AddressBookFrame extends JFrame implements AddressBookView {
         westPanel.add(new JTextArea("No contacts Yet"));
 
 
-
-
         JScrollPane scroll = new JScrollPane(westPanel);
         scroll.setPreferredSize(new Dimension(100, 300));
-
-
-
-
 
 
         //main panel
@@ -118,11 +118,18 @@ public class AddressBookFrame extends JFrame implements AddressBookView {
         saveAddressBook.setActionCommand("save");
         saveAddressBook.addActionListener(this);
 
+        importAddressBook.setActionCommand("import");
+        importAddressBook.addActionListener(this);
+
+        saveSerialisation.setActionCommand("save_s");
+        saveSerialisation.addActionListener(this);
+
+        importSerialisation.setActionCommand("import_s");
+        importSerialisation.addActionListener(this);
+
         this.add(mainPanel, BorderLayout.CENTER);
         this.add(southPanel, BorderLayout.SOUTH);
         this.add(allBuddy, BorderLayout.WEST);
-
-
 
 
         setVisible(true);
@@ -134,7 +141,6 @@ public class AddressBookFrame extends JFrame implements AddressBookView {
 //        westPanel.removeAll();
 
 
-
     }
 
 
@@ -144,6 +150,22 @@ public class AddressBookFrame extends JFrame implements AddressBookView {
 
             String fileName = JOptionPane.showInputDialog("enter the file name to export");
             model.save((fileName));
+        } else if (e.getActionCommand().startsWith("import")) {
+
+
+            String fileName = JOptionPane.showInputDialog("enter the file name to inport");
+            model.importAddressBook((fileName));
+        } else if (e.getActionCommand().startsWith("import_s")) {
+
+
+            String fileName = JOptionPane.showInputDialog("enter the file name to inport");
+            model.importFile((fileName));
+
+        } else if (e.getActionCommand().startsWith("save_s")) {
+
+
+            String fileName = JOptionPane.showInputDialog("enter the file name to inport");
+            model.export((fileName));
         }
 
     }
