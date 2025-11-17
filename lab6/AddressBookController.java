@@ -28,11 +28,47 @@ public class AddressBookController implements ActionListener {
 
 
 
-        } else if (e.getActionCommand().startsWith("remove")) {
+        }
+
+        if (e.getActionCommand().startsWith("remove")) {
             model.removeBuddy(new BuddyInfo(name, address));
         }
 
-        System.out.println(model.toXML());
+        if (e.getActionCommand().startsWith("save")) {
+
+
+            String fileName = JOptionPane.showInputDialog("enter the file name to export");
+            model.save((fileName));
+        } else if (e.getActionCommand().startsWith("import")) {
+
+
+            String fileName = JOptionPane.showInputDialog("enter the file name to import");
+            model.importAddressBook((fileName));
+        } else if (e.getActionCommand().startsWith("Seri_import")) {
+
+
+            String fileName = JOptionPane.showInputDialog("enter the file name to import");
+            model.importFile((fileName));
+
+        } else if (e.getActionCommand().startsWith("Seri_save")) {
+
+
+            String fileName = JOptionPane.showInputDialog("enter the file name to import from");
+            model.export((fileName));
+        } else if (e.getActionCommand().startsWith("XMLimport")) {
+
+
+            String fileName = JOptionPane.showInputDialog("enter the file name to import from ");
+            model.importFromXmlFile((fileName));
+
+        } else if (e.getActionCommand().startsWith("XMLexport")) {
+
+
+            String fileName = JOptionPane.showInputDialog("enter the file name to export to");
+            model.exportToXmlFile((fileName));
+
+        }
+
 
 
     }

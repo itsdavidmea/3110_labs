@@ -30,13 +30,20 @@ public class AddressBookFrame extends JFrame implements AddressBookView {
 
     //menubar
     private JMenuBar menuBar = new JMenuBar();
+
     private JMenu operations;
     private JMenuItem addBuddy;
     private JMenuItem removeBuddy;
     private JMenuItem saveAddressBook;
     private JMenuItem importAddressBook;
+
+    private JMenu serialization;
     private JMenuItem importSerialisation;
     private JMenuItem saveSerialisation;
+
+    private JMenu XMLoperation;
+    private JMenuItem importFromXML;
+    private JMenuItem exportXML;
 
 
     public AddressBookFrame() {
@@ -58,7 +65,12 @@ public class AddressBookFrame extends JFrame implements AddressBookView {
         setJMenuBar(menuBar);
 
         operations = new JMenu("Operations");
+        serialization = new JMenu("Serialization");
+        XMLoperation = new JMenu("XML");
+
         menuBar.add(operations);
+        menuBar.add(serialization);
+        menuBar.add(XMLoperation);
 
         addBuddy = new JMenuItem("Add Friend");
         removeBuddy = new JMenuItem("Remove Friend");
@@ -66,12 +78,20 @@ public class AddressBookFrame extends JFrame implements AddressBookView {
         importAddressBook = new JMenuItem("import");
         saveSerialisation = new JMenuItem("save");
         importSerialisation = new JMenuItem("import");
+        importFromXML = new JMenuItem("Import XML");
+        exportXML = new JMenuItem("Export XML");
+
         operations.add(addBuddy);
         operations.add(removeBuddy);
         operations.add(saveAddressBook);
         operations.add(importAddressBook);
-        operations.add(saveSerialisation);
-        operations.add(importSerialisation);
+
+        serialization.add(saveSerialisation);
+        serialization.add(importSerialisation);
+
+        XMLoperation.add(importFromXML);
+        XMLoperation.add(exportXML);
+
 
 
         //westPanel
@@ -116,16 +136,22 @@ public class AddressBookFrame extends JFrame implements AddressBookView {
         removeBuddy.addActionListener(controller);
 
         saveAddressBook.setActionCommand("save");
-        saveAddressBook.addActionListener(this);
+        saveAddressBook.addActionListener(controller);
 
         importAddressBook.setActionCommand("import");
-        importAddressBook.addActionListener(this);
+        importAddressBook.addActionListener(controller);
 
-        saveSerialisation.setActionCommand("save_s");
-        saveSerialisation.addActionListener(this);
+        saveSerialisation.setActionCommand("Seri_save");
+        saveSerialisation.addActionListener(controller);
 
-        importSerialisation.setActionCommand("import_s");
-        importSerialisation.addActionListener(this);
+        importSerialisation.setActionCommand("Seri_import");
+        importSerialisation.addActionListener(controller);
+
+        importFromXML.setActionCommand("XMLimport");
+        importFromXML.addActionListener(controller);
+
+        exportXML.setActionCommand("XMLexport");
+        exportXML.addActionListener(controller);
 
         this.add(mainPanel, BorderLayout.CENTER);
         this.add(southPanel, BorderLayout.SOUTH);
@@ -145,28 +171,28 @@ public class AddressBookFrame extends JFrame implements AddressBookView {
 
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().startsWith("save")) {
-
-
-            String fileName = JOptionPane.showInputDialog("enter the file name to export");
-            model.save((fileName));
-        } else if (e.getActionCommand().startsWith("import")) {
-
-
-            String fileName = JOptionPane.showInputDialog("enter the file name to inport");
-            model.importAddressBook((fileName));
-        } else if (e.getActionCommand().startsWith("import_s")) {
-
-
-            String fileName = JOptionPane.showInputDialog("enter the file name to inport");
-            model.importFile((fileName));
-
-        } else if (e.getActionCommand().startsWith("save_s")) {
-
-
-            String fileName = JOptionPane.showInputDialog("enter the file name to inport");
-            model.export((fileName));
-        }
+//        if (e.getActionCommand().startsWith("save")) {
+//
+//
+//            String fileName = JOptionPane.showInputDialog("enter the file name to export");
+//            model.save((fileName));
+//        } else if (e.getActionCommand().startsWith("import")) {
+//
+//
+//            String fileName = JOptionPane.showInputDialog("enter the file name to inport");
+//            model.importAddressBook((fileName));
+//        } else if (e.getActionCommand().startsWith("import_s")) {
+//
+//
+//            String fileName = JOptionPane.showInputDialog("enter the file name to inport");
+//            model.importFile((fileName));
+//
+//        } else if (e.getActionCommand().startsWith("save_s")) {
+//
+//
+//            String fileName = JOptionPane.showInputDialog("enter the file name to inport");
+//            model.export((fileName));
+//        }
 
     }
 

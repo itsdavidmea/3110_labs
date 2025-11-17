@@ -127,5 +127,28 @@ public class AddressBookModel extends DefaultListModel<BuddyInfo> implements Ser
 
     }
 
+    public void exportToXmlFile(String filename) {
+        try {
+            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(filename)));
+            out.write(this.toXML());
+            out.close();
+        } catch (IOException e) {
+            e.getMessage();
+        }
+    }
+
+    public void importFromXmlFile(String filename) {
+        addressBookParser parser = new addressBookParser();
+        try {
+            ArrayList<BuddyInfo> temp = parser.readXMLEmployeeFile(filename);
+            for (BuddyInfo employee: temp) {
+                this.addElement(employee);
+            }
+        } catch (IOException e) {
+            e.getMessage();
+        }
+
+    }
+
 
 }

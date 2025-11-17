@@ -5,6 +5,14 @@ public class BuddyInfo {
 
     private String age;
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public BuddyInfo(String name, String address) {
         this.name = name;
         this.address = address;
@@ -18,12 +26,13 @@ public class BuddyInfo {
 
     @Override
     public String toString() {
-        return name + " -- " + address + "   ";
+        return name + " -- " + address ;
     }
 
     public static BuddyInfo importBuddyInfo(String element) {
 
-        String[] inputValue = element.split(" -- ", 3);
+        System.out.println(element);
+        String[] inputValue = element.split(" -- ", 2);
         BuddyInfo newElement = new BuddyInfo(inputValue[0], inputValue[1]);
 
         return newElement;
@@ -32,9 +41,9 @@ public class BuddyInfo {
     public String toXML() {
 
         return "\t<BuddyInfo>\n\t\t\t"
-                + "<name>" + this.name + "</name> \n\t\t\t"
+                + "<name>" + this.name + "</name>\n\t\t\t"
                 + "<address>" + this.address + "</address>\n"
-                + "\t<BuddyInfo>";
+                + "\t</BuddyInfo>";
 
     }
 
