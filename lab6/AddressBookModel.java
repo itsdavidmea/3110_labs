@@ -67,9 +67,13 @@ public class AddressBookModel extends DefaultListModel<BuddyInfo> implements Ser
                 this.addElement(BuddyInfo.importBuddyInfo(line));
             }
 
+
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            System.out.println(toXML());
         }
+
 
     }
 
@@ -105,6 +109,21 @@ public class AddressBookModel extends DefaultListModel<BuddyInfo> implements Ser
             throw new RuntimeException(e);
         }
 
+        this.toXML();
+
+
+    }
+
+    public String toXML(){
+
+        String addressBookContent = "";
+        for (Object element : this.toArray()) {
+            BuddyInfo anElement = (BuddyInfo) element;
+            addressBookContent +=  anElement.toXML() + "\n";
+
+        }
+
+        return "<addressBook>\n" + addressBookContent + "\n</addressBook>";
 
     }
 

@@ -32,6 +32,8 @@ public class AddressBookController implements ActionListener {
             model.removeBuddy(new BuddyInfo(name, address));
         }
 
+        System.out.println(model.toXML());
+
 
     }
 }

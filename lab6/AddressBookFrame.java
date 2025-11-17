@@ -181,7 +181,9 @@ public class AddressBookFrame extends JFrame implements AddressBookView {
 
     public static void main(String[] args) {
         AddressBookFrame frame = new AddressBookFrame();
+
     }
+
 
 
 }
