@@ -1,0 +1,15 @@
+<addressBook>
+	<BuddyInfo>
+			<name>david</name>
+			<address>test</address>
+	</BuddyInfo>
+	<BuddyInfo>
+			<name>david</name>
+			<address>test</address>
+	</BuddyInfo>
+	<BuddyInfo>
+			<name>david</name>
+			<address>test</address>
+	</BuddyInfo>
+
+</addressBook>
