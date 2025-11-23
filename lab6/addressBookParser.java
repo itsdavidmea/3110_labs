@@ -41,8 +41,7 @@ public class addressBookParser extends DefaultHandler {
 
         if (qName.equalsIgnoreCase("name")) {
             buddyInfos.getLast().setName(elementContent.toString());
-        }
-        if (qName.equalsIgnoreCase("address")) {
+        } else if (qName.equalsIgnoreCase("address")) {
             buddyInfos.getLast().setAddress(elementContent.toString());
         }
     }

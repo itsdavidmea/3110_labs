@@ -123,16 +123,16 @@ public class AddressBookFrame extends JFrame implements AddressBookView {
         southPanel.add(removeButton);
 
 
-        addButton.setActionCommand("add:");
+        addButton.setActionCommand("add");
         addButton.addActionListener(controller);
 
-        removeButton.setActionCommand("remove:");
+        removeButton.setActionCommand("remove");
         removeButton.addActionListener(controller);
 
-        addBuddy.setActionCommand("add:");
+        addBuddy.setActionCommand("add");
         addBuddy.addActionListener(controller);
 
-        removeBuddy.setActionCommand("remove:");
+        removeBuddy.setActionCommand("remove");
         removeBuddy.addActionListener(controller);
 
         saveAddressBook.setActionCommand("save");

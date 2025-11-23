@@ -78,7 +78,7 @@ public class AddressBookModel extends DefaultListModel<BuddyInfo> implements Ser
     }
 
     //serialisation
-    public void export(String fileName) {
+    public void exportSerialization(String fileName) {
 
         try (FileOutputStream file = new FileOutputStream(fileName)) {
             ObjectOutputStream oos = new ObjectOutputStream(file);
@@ -94,7 +94,7 @@ public class AddressBookModel extends DefaultListModel<BuddyInfo> implements Ser
     }
 
 
-    public void importFile(String fileName) {
+    public void importSerialization(String fileName) {
 
         try (FileInputStream file = new FileInputStream(fileName)) {
             ObjectInputStream oos = new ObjectInputStream(file);
