@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<project name="Hello" default="print message">
+    <target name="print message">
+        <echo message="Hello from Ant!"/>
+    </target>
+
+
+    <target name="packaging">
+        <mkdir dir="compiled_class"/>
+        <javac srcdir="src" destdir="compiled_class" includeantruntime="false"/>
+        <jar destfile="test.jar" basedir="compiled_class">
+
+            <manifest>
+                <attribute name="Main-Class"
+                           value="AddressBookFrame"/>
+            </manifest>
+        </jar>
+        <java jar="test.jar" fork="true"/>
+    </target>
+
+</project>

@@ -1,0 +1,33 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>address-book</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>Address Book</name>
+    <build>
+        <!-- 1. Tell Maven your source files are in 'src', not 'src/main/java' -->
+        <sourceDirectory>src</sourceDirectory>
+
+        <plugins>
+            <!-- 2. The Plugin to create the JAR file -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <!-- 3. This is where we set the Main-Class -->
+                            <!-- Make sure this matches your class name exactly! -->
+                            <mainClass>AddressBookFrame</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
